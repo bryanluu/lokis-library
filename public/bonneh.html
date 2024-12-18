@@ -9,9 +9,59 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Mystery+Quest&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
+  <style>
+    * {
+      --cross-size: 20px;
+      --cross-width: 2px;
+      --cross-color: #070191;
+    }
+
+    .cross {
+      display: grid;
+      grid-template: "tl tr" "bl br";
+    }
+
+    .cross * {
+      border-color: var(--cross-color);
+      border-width: calc(var(--cross-width)/2);
+      width: calc(var(--cross-size)/2);
+      height: calc(var(--cross-size)/2);
+      position: relative;
+    }
+
+    .cross > .top-left {
+      border-right-style: solid;
+      border-bottom-style: solid;
+    }
+
+    .cross > .top-right {
+      border-left-style: solid;
+      border-bottom-style: solid;
+    }
+
+    .cross > .bottom-left {
+      border-top-style: solid;
+      border-right-style: solid;
+    }
+
+    .cross > .bottom-right {
+      border-top-style: solid;
+      border-left-style: solid;
+    }
+  </style>
 </head>
 <body>
   <h1>Bonneh's Illusion</h1>
   <p>Focus on the flashing green dot, and focus until the yellow dots disappear. How long can you make them disappear?</p>
+  <div class="illusion">
+    <div class="rotating-crosses">
+      <div class="cross">
+        <div class="top-left"></div>
+        <div class="top-right"></div>
+        <div class="bottom-left"></div>
+        <div class="bottom-right"></div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
