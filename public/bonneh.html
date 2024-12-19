@@ -17,6 +17,8 @@
       --grid-crosses-per-side: 7;
       --grid-gap: 10px;
       --grid-rotation-period: 9s;
+      --focus-color: #09ff00;
+      --focus-size: 6px;
     }
 
     body {
@@ -72,14 +74,22 @@
       align-items: center;
     }
 
-    #rotating-crosses {
+    #background {
       position: absolute;
       display: grid;
-      gap: 10px;
+      gap: var(--cross-size);
       grid-template-rows: repeat(var(--grid-crosses-per-side), 1fr);
       grid-template-columns: repeat(var(--grid-crosses-per-side), 1fr);
       animation: var(--grid-rotation-period) linear 0s rotation;
       animation-iteration-count: infinite;
+    }
+
+    #focus-point {
+      z-index: 1;
+      width: var(--focus-size);
+      height: var(--focus-size);
+      background-color: var(--focus-color);
+      border-radius: 50%;
     }
 
     @keyframes rotation {
@@ -97,25 +107,18 @@
   <h1>Bonneh's Illusion</h1>
   <p>Focus on the flashing green dot, and focus until the yellow dots disappear. How long can you make them disappear?</p>
   <div id="illusion">
-    <div id="rotating-crosses">
-      <!-- NOTE: we add all crosses here
-      <div class="cross">
-        <div class="top-left"></div>
-        <div class="top-right"></div>
-        <div class="bottom-left"></div>
-        <div class="bottom-right"></div>
-      </div> -->
-    </div>
+    <div id="background"></div>
+    <div id="focus-point"></div>
   </div>
   <script>
     const NUMBER_OF_CROSSES = 49;
-    const rotating_crosses = document.querySelector('#rotating-crosses')
+    const background = document.querySelector('#background')
     const cross_html = "<div class='cross'><div class='top-left'></div><div class='top-right'></div><div class='bottom-left'></div><div class='bottom-right'></div></div>";
     var crosses_html = "";
     for (var i = 0; i < NUMBER_OF_CROSSES; i++) {
       crosses_html += cross_html;
     }
-    rotating_crosses.innerHTML = crosses_html;
+    background.innerHTML = crosses_html;
   </script>
 </body>
 </html>
