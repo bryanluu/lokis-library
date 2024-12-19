@@ -14,7 +14,7 @@
       --cross-size: 20px;
       --cross-width: 2px;
       --cross-color: #070191;
-      --crosses-per-side: 7;
+      --grid-crosses-per-side: 7;
       --grid-gap: 10px;
       --grid-rotation-period: 9s;
     }
@@ -76,8 +76,8 @@
       position: absolute;
       display: grid;
       gap: 10px;
-      grid-template-rows: repeat(var(--crosses-per-side), 1fr);
-      grid-template-columns: repeat(var(--crosses-per-side), 1fr);
+      grid-template-rows: repeat(var(--grid-crosses-per-side), 1fr);
+      grid-template-columns: repeat(var(--grid-crosses-per-side), 1fr);
       animation: var(--grid-rotation-period) linear 0s rotation;
       animation-iteration-count: infinite;
     }
