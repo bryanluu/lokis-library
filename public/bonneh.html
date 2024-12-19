@@ -19,6 +19,7 @@
       --grid-rotation-period: 9s;
       --focus-color: #09ff00;
       --focus-size: 6px;
+      --focus-flash-period: 300ms;
     }
 
     body {
@@ -90,6 +91,8 @@
       height: var(--focus-size);
       background-color: var(--focus-color);
       border-radius: 50%;
+      animation: 500ms steps(2, jump-none) 0s flash;
+      animation-iteration-count: infinite;
     }
 
     @keyframes rotation {
@@ -99,6 +102,16 @@
 
       to {
         transform: rotate(360deg);
+      }
+    }
+
+    @keyframes flash {
+      from {
+        opacity: 100%;
+      }
+
+      to {
+        opacity: 0%;
       }
     }
   </style>
