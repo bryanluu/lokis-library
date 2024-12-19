@@ -13,13 +13,16 @@
     * {
       --cross-size: 20px;
       --cross-width: 2px;
-      --cross-color: #070191;
+      --cross-color: blue;
       --grid-crosses-per-side: 7;
       --grid-gap: 10px;
       --grid-rotation-period: 9s;
-      --focus-color: #09ff00;
+      --focus-color: lime;
       --focus-size: 6px;
       --focus-flash-period: 300ms;
+      --fade-color: yellow;
+      --fade-size: 6px;
+      --fade-flash-period: 300ms;
     }
 
     body {
@@ -78,7 +81,7 @@
     #background {
       position: absolute;
       display: grid;
-      gap: var(--cross-size);
+      gap: var(--grid-gap);
       grid-template-rows: repeat(var(--grid-crosses-per-side), 1fr);
       grid-template-columns: repeat(var(--grid-crosses-per-side), 1fr);
       animation: var(--grid-rotation-period) linear 0s rotation;
@@ -86,6 +89,7 @@
     }
 
     #focus-point {
+      position: absolute;
       z-index: 1;
       width: var(--focus-size);
       height: var(--focus-size);
@@ -93,6 +97,21 @@
       border-radius: 50%;
       animation: 500ms steps(2, jump-none) 0s flash;
       animation-iteration-count: infinite;
+    }
+
+    #distractions {
+      position: relative;
+    }
+
+    .fade-point {
+      position: absolute;
+      z-index: 1;
+      width: var(--fade-size);
+      height: var(--fade-size);
+      background-color: var(--fade-color);
+      border-radius: 50%;
+      top: calc(-1 * var(--fade-size) / 2);
+      left: calc(-1 * var(--fade-size) / 2);
     }
 
     @keyframes rotation {
@@ -122,16 +141,32 @@
   <div id="illusion">
     <div id="background"></div>
     <div id="focus-point"></div>
+    <div id="distractions"></div>
   </div>
   <script>
     const NUMBER_OF_CROSSES = 49;
-    const background = document.querySelector('#background')
+    const NUMBER_OF_FADE_POINTS = 3;
+    const FADE_POINT_DISTANCE = 80; // in pixels
+    const FADE_POINT_ANGLE = (360 / NUMBER_OF_FADE_POINTS);
+
+    const background = document.querySelector("#background");
     const cross_html = "<div class='cross'><div class='top-left'></div><div class='top-right'></div><div class='bottom-left'></div><div class='bottom-right'></div></div>";
-    var crosses_html = "";
+        var crosses_html = "";
     for (var i = 0; i < NUMBER_OF_CROSSES; i++) {
       crosses_html += cross_html;
     }
     background.innerHTML = crosses_html;
+
+    const distractions = document.querySelector("#distractions");
+    for (var i = 0; i < NUMBER_OF_FADE_POINTS; i++) {
+      distractions.innerHTML += "<div class='fade-point'></div>";
+      var fade_point = distractions.lastChild;
+      var angle_as_rad = Math.PI * (i * FADE_POINT_ANGLE) / 180;
+      var xString = (FADE_POINT_DISTANCE * Math.sin(angle_as_rad)) + "px";
+      var yString = (FADE_POINT_DISTANCE * Math.cos(angle_as_rad)) + "px";
+      var transformString = "translate(" + xString + "," + yString + ")";
+      fade_point.style.transform = transformString;
+    }
   </script>
 </body>
 </html>
