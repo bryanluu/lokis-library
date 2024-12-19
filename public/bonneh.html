@@ -16,6 +16,19 @@
       --cross-color: #070191;
       --crosses-per-side: 7;
       --grid-gap: 10px;
+      --grid-rotation-period: 9s;
+    }
+
+    body {
+      background-color: black;
+    }
+
+    body * {
+      color: white;
+    }
+
+    p {
+      padding: 50px;
     }
 
     .cross {
@@ -52,7 +65,6 @@
     }
 
     #illusion {
-      background-color: black;
       width: 500px;
       height: 500px;
       display: flex;
@@ -66,6 +78,18 @@
       gap: 10px;
       grid-template-rows: repeat(var(--crosses-per-side), 1fr);
       grid-template-columns: repeat(var(--crosses-per-side), 1fr);
+      animation: var(--grid-rotation-period) linear 0s rotation;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes rotation {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
   </style>
 </head>
