@@ -151,7 +151,7 @@
   <div id="overview">
     <h1 id="title">Bonneh's Illusion</h1>
     <p>Focus on the flashing green dot, and focus until the yellow dots disappear. How long can you make them disappear?</p>
-    <span>Number of Distraction Dots: <input id="input-distractions" type="number" value="3" min="2" max="5"></span>
+    <span>Number of Distraction Dots: <input id="input-distractions" type="number" value="3" min="2" max="5" required></span>
   </div>
   <div id="illusion">
     <div id="background"></div>
@@ -172,11 +172,20 @@
 
     const distractions = document.querySelector("#distractions");
     const distractions_input = document.querySelector("#input-distractions");
+    var num_fade_points = distractions_input.valueAsNumber;
+    var fade_point_angle = (360 / num_fade_points);
 
     function resetDistractions() {
+      if (distractions_input.validationMessage !== "")
+      {
+        // reset to previous value
+        distractions_input.value = num_fade_points;
+        return
+      }
+
       distractions.innerHTML = "";
-      var num_fade_points = distractions_input.valueAsNumber;
-      var fade_point_angle = (360 / num_fade_points);
+      num_fade_points = distractions_input.valueAsNumber;
+      fade_point_angle = (360 / num_fade_points);
       for (var i = 0; i < num_fade_points; i++) {
         distractions.innerHTML += "<div class='fade-point'></div>";
         var fade_point = distractions.lastChild;
