@@ -33,8 +33,15 @@
       color: white;
     }
 
-    p {
-      padding: 50px;
+    #overview {
+      display: flex;
+      flex-direction: column;
+      padding: 5%;
+      align-items: center;
+    }
+
+    #title {
+      text-align: center;
     }
 
     .cross {
@@ -136,8 +143,11 @@
   </style>
 </head>
 <body>
-  <h1>Bonneh's Illusion</h1>
-  <p>Focus on the flashing green dot, and focus until the yellow dots disappear. How long can you make them disappear?</p>
+  <div id="overview">
+    <h1 id="title">Bonneh's Illusion</h1>
+    <p>Focus on the flashing green dot, and focus until the yellow dots disappear. How long can you make them disappear?</p>
+
+  </div>
   <div id="illusion">
     <div id="background"></div>
     <div id="focus-point"></div>
